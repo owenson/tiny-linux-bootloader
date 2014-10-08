@@ -1,0 +1,5 @@
+tar rem :1234
+set disassembly-flavor intel
+set arch i8086
+disp/5i $pc
+
