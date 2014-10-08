@@ -3,6 +3,15 @@ tiny-linux-bootloader
 
 A x86 single sector Linux bootloader that can handle initrd.  This bootloader expects to find the kernel immediately after it at sector 1, followed immediately by the initrd.  Any partitions must start after this.
 
+## Features/Purpose
+
+* No partition table needed
+* Easy to convert to an obfuscated loader (think anti-forensics for crypted disks)
+* Easy to modify for a custom experience
+* Useful in embedded devices
+
+## Building
+
 To build, you need to:
 
 1. Edit build.sh and set paths to your kernel + initrd
