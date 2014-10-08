@@ -12,3 +12,10 @@ To build, you need to:
 
 Your system should now boot with the new kernel.
 
+# Troubleshooting
+
+You can use qemu to boot the image by running:
+
+    qemu-system-x86 disk
+
+and you can also connect the VM to gdb for actual debugging.  There's an included gdb script to get you started.
