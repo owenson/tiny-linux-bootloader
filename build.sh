@@ -17,8 +17,8 @@
 
 INPUT="bsect.asm"
 OUTPUT="disk"
-KERN="/boot/vmlinuz-linux-lts-gareth"
-RD="/boot/initramfs-linux-lts-gareth.img"
+KERN="./kernel"
+RD="./init"
 
 #size of kern + ramdisk
 K_SZ=`stat -c %s $KERN`

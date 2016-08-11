@@ -127,6 +127,10 @@ kernel_start:
 ;clobbers 0x2000 segment
 loader:
 .loop:
+    cmp edx, 127*512
+    jl loader.part_2
+    jz loader.finish
+
     mov ax, 127 ;count
     xor bx, bx ; offset
     mov cx, 0x2000 ; seg
@@ -135,9 +139,6 @@ loader:
     call highmove
     pop edx
     sub edx, 127*512
-    cmp edx, 127*512
-    jl loader.part_2
-    jz loader.finish
     jmp loader.loop
 
 .part_2:   ; load less than 127*512 sectors
