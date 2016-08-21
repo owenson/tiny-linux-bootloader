@@ -17,8 +17,8 @@
 
 INPUT="bsect.asm"
 OUTPUT="disk"
-KERN="./kernel"
-RD="./init"
+KERN="./barebones"
+RD="./big.init"
 
 #size of kern + ramdisk
 K_SZ=`stat -c %s $KERN`

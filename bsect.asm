@@ -80,7 +80,7 @@ read_kernel_setup:
     jz err
 
     mov byte [es:0x210], 0xe1 ;loader type
-    mov byte [es:0x211], 0x80 ;heap use? !! SET Bit5 to Make Kern Quiet
+    mov byte [es:0x211], 0x81 ;heap use? !! SET Bit5 to Make Kern Quiet
     mov word [es:0x224], 0xde00 ;head_end_ptr
     mov byte [es:0x227], 0x01 ;ext_loader_type / bootloader id
     mov dword [es:0x228], 0x1e000 ;cmd line ptr
@@ -101,11 +101,18 @@ read_kernel_setup:
     call loader
 
 ;load initrd
-    mov eax, [highmove_addr] ; end of kernel and initrd load address
+    mov eax, 0x7fab000; this is the address qemu loads it at
+    mov [highmove_addr],eax ; end of kernel and initrd load address
+    ;mov eax, [highmove_addr] ; end of kernel and initrd load address
+    ;add eax, 4096
+    ;and eax, 0xfffff000
+    ;mov [highmove_addr],eax ; end of kernel and initrd load address
+
     mov [es:0x218], eax
     mov edx, [initRdSize] ; ramdisk size in bytes
     mov [es:0x21c], edx ; ramdisk size into kernel header
     call loader
+
 
 
 kernel_start:
@@ -139,6 +146,7 @@ loader:
     call highmove
     pop edx
     sub edx, 127*512
+
     jmp loader.loop
 
 .part_2:   ; load less than 127*512 sectors
