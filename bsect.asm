@@ -202,18 +202,21 @@ print.end:
 %endif
 
 hddread:
+    push eax
     mov [dap.count], ax
     mov [dap.offset], bx
     mov [dap.segment], cx
-    mov dx, [hddLBA]
-    mov [dap.lba], dx
-    add dx, ax       ; advance lba pointer
-    mov [hddLBA], dx
+    mov edx, dword [hddLBA]
+    mov dword [dap.lba], edx
+    and eax, 0xffff
+    add edx, eax       ; advance lba pointer
+    mov [hddLBA], edx
     mov ah, 0x42
     mov si, dap
     mov dl, 0x80 ; first hdd
     int 0x13
     jc err
+    pop eax
     ret
 
 dap:
