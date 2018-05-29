@@ -259,7 +259,7 @@ gdt_end:
     cmdLine db cmdLineDef,0
     cmdLineLen equ $-cmdLine
     initRdSize dd initRdSizeDef ; from config.inc
-    hddLBA dw 1   ; start address for kernel - subsequent calls are sequential
+    hddLBA dd 1   ; start address for kernel - subsequent calls are sequential
 
 ;boot sector magic
 	times	510-($-$$)	db	0
